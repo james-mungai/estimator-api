@@ -52,7 +52,7 @@ app.get('/api/v1/on-covid-19/logs', async (req,res) => {
         logs.forEach(item=>{
             logsText+=`${item.log} \n`
         })
-        res.setHeader('Content-Type', 'text')
+        res.setHeader('Content-Type', 'application/text')
         res.status(200).send(logsText)
     } catch (error) {
         res.status(500).send('Server Error')
