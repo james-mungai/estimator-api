@@ -25,6 +25,7 @@ app.use(function logger(req, res, next) {
 app.post(['/api/v1/on-covid-19', '/api/v1/on-covid-19/json'], (req,res) => {
     try {
         const covidEstimate = covid19ImpactEstimator(req.body)
+        res.setHeader('Content-type', 'application/json')
         res.status(200).send(covidEstimate)
         
     } catch (error) {
@@ -37,6 +38,7 @@ app.post('/api/v1/on-covid-19/xml', (req,res) => {
         const covidEstimate = covid19ImpactEstimator(req.body)
         const myBuilder = new xml2js.Builder()
         const xmlData = myBuilder.buildObject(covidEstimate)
+        res.setHeader('Content-Type', 'text/xml')
         res.status(200).setHeader().send(xmlData)
     } catch (error) {
         res.status(500).send('Server Error')
@@ -50,6 +52,7 @@ app.get('/api/v1/on-covid-19/logs', async (req,res) => {
         logs.forEach(item=>{
             logsText+=`${item.log} \n`
         })
+        res.setHeader('Content-Type', 'text')
         res.status(200).send(logsText)
     } catch (error) {
         res.status(500).send('Server Error')
