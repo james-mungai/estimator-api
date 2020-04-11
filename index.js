@@ -29,6 +29,8 @@ app.post(['/api/v1/on-covid-19', '/api/v1/on-covid-19/json'], (req,res) => {
         res.status(200).send(covidEstimate)
         
     } catch (error) {
+        console.log(error);
+        
         res.status(500).send('Server error')
     }
 }
