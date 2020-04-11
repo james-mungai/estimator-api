@@ -15,7 +15,7 @@ app.use(function logger(req, res, next) {
     res.on("finish", () => {
       const elapsedHrTime = process.hrtime(startHrTime);
       const timeTaken = elapsedHrTime[0] * 1000 + elapsedHrTime[1] / 1e6;
-      const reqLog = {log: `${req.method}\t\t${req.path}\t\t${res.statusCode}\t\t${Math.round(timeTaken)}`}
+      const reqLog = {log: `${req.method}\t\t${req.path}\t\t${res.statusCode}\t\t${Math.round(timeTaken)} ms`}
       const log = new Log(reqLog)
       log.save()
     });
